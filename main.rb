@@ -4,7 +4,7 @@ require 'sinatra'
 set :sessions, true
 
 get '/' do
-  "Hello World"
+  erb :form
 end
 
 
