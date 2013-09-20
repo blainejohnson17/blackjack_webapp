@@ -31,7 +31,7 @@
     <% end %>
 
       <p>
-        <h5>Dealer has <%= calculate_total(session[:dealer_cards])%></h5>
+        <h5>Dealer has <%= total(session[:dealer_cards])%></h5>
       </p>
   </div>
   <br/>
@@ -50,7 +50,7 @@
 <% if session[:state] == 2 %>
   <p>
     What would <%= session[:player_name] %> like to do?
-    <%= session[:player_name] %> has <%= calculate_total(session[:player_cards]) %>
+    <%= session[:player_name] %> has <%= total(session[:player_cards]) %>
     <form id="hit_form" action="/game/player/hit" method='post'>
     <input type="submit" class="btn btn-success" value="Hit" />
     </form>
