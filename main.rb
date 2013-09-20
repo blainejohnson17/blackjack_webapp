@@ -4,11 +4,11 @@ require 'sinatra'
 set :sessions, true
 
 BLACKJACK_AMOUNT = 21
-DEALER_MIN_HIT = 17
+DEALER_MIN_STAY = 17
 INITIAL_POT_AMOUNT = 500
 
 helpers do
-  def calculate_total(cards) # cards is [["H", "3"], ["D", "J"], ... ]
+  def total(cards) # cards is [["H", "3"], ["D", "J"], ... ]
     arr = cards.map{|element| element[1]}
 
     total = 0
@@ -63,6 +63,63 @@ helpers do
   def tie!(msg)
     @success = "<strong>It's a tie!</strong> #{msg}"
   end
+
+  def create_deck
+    # create a deck and put it in session
+    suits = ['H', 'D', 'C', 'S']
+    values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
+    session[:deck] = suits.product(values).shuffle! # [ ['H', '9'], ['C', 'K'] ... ]
+  end
+
+  def deal
+    # deal cards
+    session[:dealer_cards] = []
+    session[:player_cards] = []
+    2.times do
+      session[:dealer_cards] << session[:deck].pop
+      session[:player_cards] << session[:deck].pop
+    end
+  end
+
+  def blackjack?
+    total(session[:player_cards]) == BLACKJACK_AMOUNT ? true : false
+  end
+
+  def blackjack
+    winner!("#{session[:player_name]} hit blackjack.")
+    session[:state] = 4
+  end
+
+  def bust?(cards)
+    total(cards) > BLACKJACK_AMOUNT ? true : false    
+  end
+
+  def bust
+    loser!("It looks like #{session[:player_name]} busted at #{total(session[:player_cards])}.")
+    session[:state] = 4
+  end
+
+  def dealer_turn
+    while total(session[:dealer_cards]) < DEALER_MIN_STAY
+      session[:dealer_cards] << session[:deck].pop
+      if bust?(session[:dealer_cards])
+        winner!("Dealer busted at #{total(session[:dealer_cards])}.")
+      end
+    end
+  end
+
+  def who_won
+    player_total = total(session[:player_cards])
+    dealer_total = total(session[:dealer_cards])
+
+    if player_total == dealer_total
+      tie!("Both #{session[:player_name]} and the dealer stayed at #{player_total}.")
+    elsif player_total < dealer_total && dealer_total <= BLACKJACK_AMOUNT
+      loser!("#{session[:player_name]} stayed at #{player_total}, and the dealer stayed at #{dealer_total}.")
+    else
+      winner!("#{session[:player_name]} stayed at #{player_total}, and the dealer stayed at #{dealer_total}.")
+    end
+  end
 end
 
 get '/' do
@@ -88,85 +145,23 @@ post '/bet' do
   else #happy path
     session[:player_bet] = params[:bet_amount].to_i
     session[:state] = 2
-    redirect '/game'
+    create_deck
+    deal
+    blackjack if blackjack?
+    erb :game
   end
-end
-
-get '/game' do
-
-  # create a deck and put it in session
-  suits = ['H', 'D', 'C', 'S']
-  values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
-  session[:deck] = suits.product(values).shuffle! # [ ['H', '9'], ['C', 'K'] ... ]
-
-  # deal cards
-  session[:dealer_cards] = []
-  session[:player_cards] = []
-  session[:dealer_cards] << session[:deck].pop
-  session[:player_cards] << session[:deck].pop
-  session[:dealer_cards] << session[:deck].pop
-  session[:player_cards] << session[:deck].pop
-
-  erb :game
 end
 
 post '/game/player/hit' do
   session[:player_cards] << session[:deck].pop
-
-  player_total = calculate_total(session[:player_cards])
-  if player_total == BLACKJACK_AMOUNT
-    winner!("#{session[:player_name]} hit blackjack.")
-    session[:state] = 4
-  elsif player_total > BLACKJACK_AMOUNT
-    loser!("It looks like #{session[:player_name]} busted at #{player_total}.")
-    session[:state] = 4
-  end
-
+  bust if bust?(session[:player_cards])
   erb :game
 end
 
 post '/game/player/stay' do
-  @success = "#{session[:player_name]} has chosen to stay."
   session[:state] = 3
-  redirect '/game/dealer'
-end
-
-get '/game/dealer' do
-
-  # decision tree
-  dealer_total = calculate_total(session[:dealer_cards])
-
-  if dealer_total == BLACKJACK_AMOUNT
-    loser!("Dealer hit blackjack.")
-  elsif dealer_total > BLACKJACK_AMOUNT
-    winner!("Dealer busted at #{dealer_total}.")
-  elsif dealer_total >= DEALER_MIN_HIT #17, 18, 19, 20
-    @success = "Dealer has chosen to stay."
-    redirect '/game/compare'
-  else
-    @success = "Dealer has chosen to hit."
-    redirect '/game/dealer/hit'
-  end
-  session[:state] = 4
-  erb :game
-end
-
-get '/game/dealer/hit' do
-  session[:dealer_cards] << session[:deck].pop
-  redirect '/game/dealer'
-end
-
-get '/game/compare' do
-  player_total = calculate_total(session[:player_cards])
-  dealer_total = calculate_total(session[:dealer_cards])
-
-  if player_total < dealer_total
-    loser!("#{session[:player_name]} stayed at #{player_total}, and the dealer stayed at #{dealer_total}.")
-  elsif player_total > dealer_total
-    winner!("#{session[:player_name]} stayed at #{player_total}, and the dealer stayed at #{dealer_total}.")
-  else
-    tie!("Both #{session[:player_name]} and the dealer stayed at #{player_total}.")
-  end
+  dealer_turn
+  who_won
   session[:state] = 4
   erb :game
 end
