@@ -1,0 +1,61 @@
+<% if session[:state] == 0 %>
+  <form action="/new_player" method="post">
+    Name: <input type="text" name="player_name" value="Player1"/><br/>
+    <input type="submit" value="Play" class="btn"/>
+  </form>
+<% end %>
+
+<% if session[:state] == 1 %>
+  <form action="/bet" method="post">
+    Bet: <input type="text" name="bet_amount"/><br/>
+    <input type="submit" value="Deal" class="btn"/>
+  </form>
+<% end %>
+
+<% if session[:state] == 4 %>
+  <a href="/again" class="btn">Play Again</a>  
+  <a href="/" class="btn">Reset</a>  
+<% end %>
+
+
+
+<% if session[:state] > 1 %>
+  <div class="well">
+    <h4>Dealer's cards:</h4>
+    <% session[:dealer_cards].each_with_index do |card, i| %>
+      <% if session[:state] < 3 && i == 0 %>
+        <img src="/images/cards/cover.jpg">
+      <% else %>
+        <%= card_image(card) %>
+      <% end %>
+    <% end %>
+
+      <p>
+        <h5>Dealer has <%= calculate_total(session[:dealer_cards])%></h5>
+      </p>
+  </div>
+  <br/>
+  <div class="well">
+    <h4>Player's cards:</h4>
+    <% session[:player_cards].each do |card| %>
+      <%= card_image(card) %>
+    <% end %>
+
+    <h5>
+      <%= session[:player_name] %> has $<%= session[:player_pot] %> and bet $<%= session[:player_bet]%> this round.
+    </h5>
+  </div>
+<% end %>
+
+<% if session[:state] == 2 %>
+  <p>
+    What would <%= session[:player_name] %> like to do?
+    <%= session[:player_name] %> has <%= calculate_total(session[:player_cards]) %>
+    <form id="hit_form" action="/game/player/hit" method='post'>
+    <input type="submit" class="btn btn-success" value="Hit" />
+    </form>
+    <form id="stay_form" action="/game/player/stay" method='post'>
+    <input type="submit" class="btn btn-warning" value="Stay" />
+    </form>
+  </p>
+<% end %>
