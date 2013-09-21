@@ -1,23 +1,35 @@
-<% if session[:state] == 0 %>
-  <form action="/new_player" method="post">
-    Name: <input type="text" name="player_name" value="Player1"/><br/>
-    <input type="submit" value="Play" class="btn"/>
-  </form>
-<% end %>
+<aside class="pull-right">
+  <% if session[:state] == 0 %>
+    <form action="/new_player" method="post">
+      Name: <input type="text" name="player_name" value="Player1"/><br/>
+      <input type="submit" value="Play" class="btn"/>
+    </form>
+  <% end %>
 
-<% if session[:state] == 1 %>
-  <form action="/bet" method="post">
-    Bet: <input type="text" name="bet_amount"/><br/>
-    <input type="submit" value="Deal" class="btn"/>
-  </form>
-<% end %>
+  <% if session[:state] == 1 %>
+    <form action="/bet" method="post">
+      Bet: <input type="text" name="bet_amount"/><br/>
+      <input type="submit" value="Deal" class="btn"/>
+    </form>
+  <% end %>
 
-<% if session[:state] == 4 %>
-  <a href="/again" class="btn">Play Again</a>  
-  <a href="/" class="btn">Reset</a>  
-<% end %>
+  <% if session[:state] == 4 %>
+    <a href="/again" class="btn">Play Again</a>  
+    <a href="/" class="btn">Reset</a>  
+  <% end %>
 
-
+  <% if session[:state] == 2 %>
+    <p>
+      <%= session[:player_name] %> has <%= total(session[:player_cards]) %>
+    </p>
+    <form id="hit_form" action="/game/player/hit" method='post'>
+    <input type="submit" class="btn btn-success" value="Hit" />
+    </form>
+    <form id="stay_form" action="/game/player/stay" method='post'>
+    <input type="submit" class="btn btn-warning" value="Stay" />
+    </form>
+  <% end %>
+</aside>
 
 <% if session[:state] > 1 %>
   <div class="well">
@@ -45,17 +57,4 @@
       <%= session[:player_name] %> has $<%= session[:player_pot] %> and bet $<%= session[:player_bet]%> this round.
     </h5>
   </div>
-<% end %>
-
-<% if session[:state] == 2 %>
-  <p>
-    What would <%= session[:player_name] %> like to do?
-    <%= session[:player_name] %> has <%= total(session[:player_cards]) %>
-    <form id="hit_form" action="/game/player/hit" method='post'>
-    <input type="submit" class="btn btn-success" value="Hit" />
-    </form>
-    <form id="stay_form" action="/game/player/stay" method='post'>
-    <input type="submit" class="btn btn-warning" value="Stay" />
-    </form>
-  </p>
 <% end %>
