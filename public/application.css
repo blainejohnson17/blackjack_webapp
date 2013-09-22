@@ -5,6 +5,12 @@ display:block;
 body {
 	background: url(../images/bg.png) repeat;
 }
+form {
+	display: inline;
+}
+input {
+	margin-bottom: 0 !important;
+}
 .card {
 	border: 1px solid grey;
 	-webkit-border-radius: 5px;
@@ -13,6 +19,10 @@ body {
 	-webkit-box-shadow: 2px 2px 5px rgba(50, 50, 50, 0.75);
 	-moz-box-shadow:    2px 2px 5px rgba(50, 50, 50, 0.75);
 	box-shadow:         2px 2px 5px rgba(50, 50, 50, 0.75);
+}
+.card-area {
+	height: 250px;
+	width: auto;
 }
 ul {
 	list-style: none;

@@ -132,6 +132,10 @@ end
 post '/new_player' do
   session[:player_name] = params[:player_name]
   session[:state] = 1
+  redirect '/bet'
+end
+
+get '/bet' do
   erb :game
 end
 
@@ -148,8 +152,21 @@ post '/bet' do
     create_deck
     deal
     blackjack if blackjack?
-    erb :game
+    redirect :game
   end
+end
+
+post '/re-bet' do
+    session[:player_bet] = session[:prev_bet]
+    session[:state] = 2
+    create_deck
+    deal
+    blackjack if blackjack?
+    redirect :game
+end
+
+get '/game' do
+  erb :game
 end
 
 post '/game/player/hit' do
@@ -169,5 +186,5 @@ end
 get '/again' do
   session[:prev_bet] = session[:player_bet]
   session[:state] = 1
-  erb :game
+  redirect :bet
 end
