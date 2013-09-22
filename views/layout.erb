@@ -1,30 +1,22 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>My First App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blackjack Game</title>
     <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-responsive.css">
     <link rel="stylesheet" href="/application.css">
+    <!-- HTML5 shim for IE backwards compatibility -->
+        <!--[if lt IE 9]>
+          <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
   </head>
-  <body style="padding-top: 50px;">
-
-    <div class="navbar navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
-            <ul class="nav">
-              <li><a href="/">Nav Item</a></li>
-            </ul>
-        </div>
-      </div>
-    </div>
-
-  <div class="container">
-    <%if @error %>
-      <div class="alert alert-error"><%=@error%></div>
-    <% end %>
-    <%if @success %>
-      <div class="alert alert-success"><%=@success%></div>
-    <% end %>
-    <%= yield %>
+  <body>
+  <div class="container-fluid">
+      <%= yield %>
   </div>
+
+  <script src="http://code.jquery.com/jquery-latest.js"></script>
+  <script src="js/bootstrap.min.js"></script>
   </body>
 </html>

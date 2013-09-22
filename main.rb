@@ -47,7 +47,7 @@ helpers do
       end
     end
 
-    "<img src='/images/cards/#{suit}_#{value}.jpg' class='card_image'>"
+    "/images/cards/#{suit}_#{value}.jpg"
   end
 
   def winner!(msg)
