@@ -1,7 +1,8 @@
 <div class="row-fluid card-area">
-  <div class="span4">
+  <div class="span3 offset1 score">
     <% if session[:state] > 1 %>
-    <h1 class="pull-right score"><%= total(session[:dealer_cards])%></h1>
+    <h3 class="pull-left">Dealer's Total</h3>
+    <p class="pull-left"><%= total(session[:dealer_cards])%></p>
     <% end %>
   </div>
   <div class="span8">
@@ -25,9 +26,10 @@
   </div>
 </div>
 <div class="row-fluid card-area">
-  <div class="span4">
+  <div class="span3 offset1 score">
     <% if session[:state] > 1 %>
-      <h1 class="pull-right score"><%= total(session[:player_cards])%></h1>
+      <h3 class="pull-left"><%= session[:player_name] %>'s Total</h3>
+      <p class="pull-left"><%= total(session[:player_cards])%></p>
     <% end %>
   </div>
   <div class="span5">
@@ -56,31 +58,31 @@
     <% if session[:state] == 0 %>
       <form action="/new_player" method="post">
         Name: <input type="text" name="player_name" value="Player1"/><br/>
-        <input type="submit" value="Play" class="btn"/>
+        <input type="submit" value="Play" class="btn btn-large"/>
       </form>
     <% end %>
 
     <% if session[:state] == 1 %>
       <form action="/bet" method="post">
         <input type="text" name="bet_amount" placeholder="New Bet" class="input-mini"/>
-        <input type="submit" value="Bet" class="btn btn-primary"/>
+        <input type="submit" value="Bet" class="btn btn-large btn-inverse"/>
       </form>
       <form action="/re-bet" method="post">
-        <input type="submit" value="Re-Bet $<%=session[:prev_bet] %>" class="btn btn-primary"/>
+        <input type="submit" value="Re-Bet $<%=session[:prev_bet] %>" class="btn btn-large btn-inverse"/>
       </form>
     <% end %>
 
     <% if session[:state] == 4 %>
-      <a href="/again" class="btn btn-primary">Play Again</a>  
-      <a href="/" class="btn btn-primary">Reset</a>  
+      <a href="/again" class="btn btn-large btn-inverse">Play Again</a>  
+      <a href="/" class="btn btn-large btn-inverse">Reset</a>  
     <% end %>
 
     <% if session[:state] == 2 %> 
       <form id="hit_form" action="/game/player/hit" method='post'>
-      <input type="submit" class="btn btn-primary" value="Hit" />
+      <input type="submit" class="btn btn-large btn-inverse" value="Hit" />
       </form>
       <form id="stay_form" action="/game/player/stay" method='post'>
-      <input type="submit" class="btn btn-primary" value="Stay" />
+      <input type="submit" class="btn btn-large btn-inverse" value="Stay" />
       </form>
     <% end %>
   </nav>
