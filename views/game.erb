@@ -1,11 +1,11 @@
 <div class="row-fluid card-area">
-  <div class="span3 offset1 score">
+  <div class="span4 offset1 score">
     <% if session[:state] > 1 %>
     <h3 class="pull-left">Dealer's Total</h3>
     <p class="pull-left"><%= total(session[:dealer_cards])%></p>
     <% end %>
   </div>
-  <div class="span8">
+  <div class="span7">
     <% if session[:state] > 1 %>
       <% count = 1 %>
       <% session[:dealer_cards].each_with_index do |card, i| %>
@@ -26,13 +26,13 @@
   </div>
 </div>
 <div class="row-fluid card-area">
-  <div class="span3 offset1 score">
+  <div class="span4 offset1 score">
     <% if session[:state] > 1 %>
       <h3 class="pull-left"><%= session[:player_name] %>'s Total</h3>
       <p class="pull-left"><%= total(session[:player_cards])%></p>
     <% end %>
   </div>
-  <div class="span5">
+  <div class="span7">
     <% if session[:state] > 1 %>
       <% count = 1 %>
       <% session[:player_cards].each do |card| %>
@@ -49,10 +49,20 @@
   </div>
 </div>
 <div class="row-fluid">
-  <div class="span4">
-    <h5>
-      <%= session[:player_name] %> has $<%= session[:player_pot] %> and bet $<%= session[:player_bet]%> this round.
-    </h5>
+  <div class="span3 offset1">
+    <a href="#">
+      <ul class="chips">
+        <li><img src="/images/pokerchip1.png" alt="poker chip">
+          <ul>
+            <li><img src="/images/pokerchip1.png" alt="poker chip">
+              <ul>
+                <li><img src="/images/pokerchip1.png" alt="poker chip"></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </a>    
   </div>
   <nav class="span8">
     <% if session[:state] == 0 %>

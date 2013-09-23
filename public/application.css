@@ -32,13 +32,39 @@
 	font-style: normal;
 }
 
+@font-face {
+	font-family: 'LobsterTwo';
+	src: url("fonts/LobsterTwo-Regular.otf") format("opentype");
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'LobsterTwoBold';
+	font-weight: bold;
+	src: url("fonts/LobsterTwo-Bold.otf") format("opentype");
+	font-weight: bold;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Blackjack';
+	src: url("fonts/black_jack.ttf") format("truetype");
+	font-weight: normal;
+	font-style: normal;
+}
+
+ol,ul { list-style: none; }
+
+.texthide { text-indent: -9999em; }
 
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 display:block;
 }
 body {
-	background: url(/images/pool_table.png) repeat;
+	background: url(/images/pool_table2.png) repeat;
+	color: #000;
 }
 form {
 	display: inline;
@@ -50,6 +76,28 @@ input[type="text"] {
 	margin-bottom: 0 !important;
 	min-height: 10px !important; height: 35px ;
 }
+
+#logo {
+	width: 150px;
+	height: 150px;
+	padding-top: 15px;
+	background: url(/images/spade.png) bottom no-repeat;
+	-webkit-transition: opacity .2s ease-in-out;
+	-moz-transition: opacity .2s ease-in-out;
+	-o-transition: opacity .2s ease-in-out;
+	transition: opacity .2s ease-in-out;
+	
+}
+
+#logo:hover {
+	opacity: .70;
+}
+
+h1#main-title {
+	font: normal 130px "Blackjack", Tahoma, Arial, sans-serif;
+	padding-left: 10%;
+}
+
 .card {
 	border: 1px solid grey;
 	-webkit-border-radius: 5px;
@@ -63,28 +111,24 @@ input[type="text"] {
 	height: 250px;
 	width: auto;
 }
-ul {
-	list-style: none;
-}
-ul ul{
+
+ul.cards ul{
 	position: absolute;  
 	top: 10px;
 	left: 10px;   
 }
-ul li {
+ul.cards li {
 	position: relative;
-	height: 240px;
-	width: 165px;
+	height: 120px;
+	width: 83px;
 }
-.row-fluid {
-	padding-top: 30px
-}
+
 .score p {
 	text-align: center;
 	line-height: 50px;
 	font-size: 32px;
 	font-weight: bold;
-	border: 1px solid darkgrey;
+	border: 1px solid black;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
@@ -95,18 +139,29 @@ ul li {
 	height: 50px;
 	width: 50px;
 	margin: 10px;
-	background: #d0d0c6;
-	background: rgba(208, 208, 198, .5);
-	color: #787871;
-	text-shadow: 1px 1px 1px #fff;
+	background: #000;
+	background: rgba(0, 0, 0, .5);
+	color: rgba(48, 48, 48, .7);
+	text-shadow: #fff 0px 0.5px 1px, #000 0 1px 1px;
 }
 .score h3{
 	width: 70%;
 	background: url(/images/divider2.png) no-repeat bottom left;
-	font: normal 36px "LeagueGothicRegular", Tahoma, Arial, sans-serif;
+	font: normal 60px "LeagueGothicRegular", Tahoma, Arial, sans-serif;
 	text-transform: uppercase;
-	color: #787871;
-	text-shadow: 1px 1px 1px #fff;
-	letter-spacing: 1px;
+	color: #0d3a1f;
+	text-shadow: #fff 0px 0.5px 1px, #000 0 1px 1px;
+	letter-spacing: 3px;
 	line-height: 50px;
+}
+
+ul.chips ul{
+	position: absolute;  
+	top: -13px;
+	left: -20px;   
+}
+ul.chips li {
+	position: relative;
+	height: 43px;
+	width: 101px;
 }
