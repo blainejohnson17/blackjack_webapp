@@ -1,15 +1,10 @@
 <div class="row-fluid card-area">
-  <div class="span4 offset1 score">
+  <div class="span8 offset4">
     <% if session[:state] > 1 %>
-    <h3 class="pull-left">Dealer's Total</h3>
-    <p class="pull-left"><%= total(session[:dealer_cards])%></p>
-    <% end %>
-  </div>
-  <div class="span7">
-    <% if session[:state] > 1 %>
+      <p class="score pull-left"><%= total(session[:dealer_cards])%></p>
       <% count = 1 %>
       <% session[:dealer_cards].each_with_index do |card, i| %>
-        <ul class="cards">
+        <ul class="cards pull-left">
           <li>
         <% if session[:state] < 3 && i == 0 %>
           <img src="/images/cards/cover.jpg" class="card">
@@ -26,17 +21,12 @@
   </div>
 </div>
 <div class="row-fluid card-area">
-  <div class="span4 offset1 score">
+  <div class="span8 offset4">
     <% if session[:state] > 1 %>
-      <h3 class="pull-left"><%= session[:player_name] %>'s Total</h3>
-      <p class="pull-left"><%= total(session[:player_cards])%></p>
-    <% end %>
-  </div>
-  <div class="span7">
-    <% if session[:state] > 1 %>
+      <p class="score pull-left"><%= total(session[:player_cards])%></p>
       <% count = 1 %>
       <% session[:player_cards].each do |card| %>
-        <ul class="cards">
+        <ul class="cards pull-left">
           <li>
             <img src="<%= card_image(card) %>" class="card">
         <% count += 1 %>

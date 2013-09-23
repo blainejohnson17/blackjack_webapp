@@ -109,7 +109,6 @@ h1#main-title {
 }
 .card-area {
 	height: 250px;
-	width: auto;
 }
 
 ul.cards ul{
@@ -123,7 +122,11 @@ ul.cards li {
 	width: 83px;
 }
 
-.score p {
+p.score {
+	position: relative;
+	top: 0;
+	left: -5px;
+	z-index: 9999;
 	text-align: center;
 	line-height: 50px;
 	font-size: 32px;
@@ -135,7 +138,6 @@ ul.cards li {
     -moz-box-shadow:    inset 0 0 7px #000000;
     -webkit-box-shadow: inset 0 0 7px #000000;
     box-shadow:         inset 0 0 7px #000000;
-	position: relative;
 	height: 50px;
 	width: 50px;
 	margin: 10px;
@@ -143,16 +145,6 @@ ul.cards li {
 	background: rgba(0, 0, 0, .5);
 	color: rgba(48, 48, 48, .7);
 	text-shadow: #fff 0px 0.5px 1px, #000 0 1px 1px;
-}
-.score h3{
-	width: 70%;
-	background: url(/images/divider2.png) no-repeat bottom left;
-	font: normal 60px "LeagueGothicRegular", Tahoma, Arial, sans-serif;
-	text-transform: uppercase;
-	color: #0d3a1f;
-	text-shadow: #fff 0px 0.5px 1px, #000 0 1px 1px;
-	letter-spacing: 3px;
-	line-height: 50px;
 }
 
 ul.chips ul{
