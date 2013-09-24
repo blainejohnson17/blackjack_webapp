@@ -1,7 +1,13 @@
-<div class="row-fluid card-area">
-  <div class="span8 offset4">
+<section class="play-area">
+<div class="row-fluid">
+  <div class="card-area span7 offset5">
     <% if session[:state] > 1 %>
       <p class="score pull-left"><%= total(session[:dealer_cards])%></p>
+      <% if @winner %>
+        <div class="alert alert-error"><h2><%=@dealer%></h2></div>
+      <% elsif @loser %>
+        <div class="alert alert-success"><h2><%=@dealer%></h2></div>
+      <% end %>
       <% count = 1 %>
       <% session[:dealer_cards].each_with_index do |card, i| %>
         <ul class="cards pull-left">
@@ -20,10 +26,18 @@
     <% end %>
   </div>
 </div>
-<div class="row-fluid card-area">
-  <div class="span8 offset4">
+<div class="row-fluid">
+  <div class="card-area span7 offset5">
     <% if session[:state] > 1 %>
       <p class="score pull-left"><%= total(session[:player_cards])%></p>
+      <% if @winner %>
+        <div class="alert alert-success"><h2><%=@winner%></h2></div>
+      <% elsif @loser %>
+        <div class="alert alert-error"><h2><%=@loser%></h2></div>
+      <% end %>
+      <% if @blackjack %>
+      <div class="alert alert-success"><h1><%=@blackjack%></h1></div>
+      <% end %>
       <% count = 1 %>
       <% session[:player_cards].each do |card| %>
         <ul class="cards pull-left">
@@ -38,52 +52,4 @@
     <% end %>
   </div>
 </div>
-<div class="row-fluid">
-  <div class="span3 offset1">
-    <a href="#">
-      <ul class="chips">
-        <li><img src="/images/pokerchip1.png" alt="poker chip">
-          <ul>
-            <li><img src="/images/pokerchip1.png" alt="poker chip">
-              <ul>
-                <li><img src="/images/pokerchip1.png" alt="poker chip"></li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </a>    
-  </div>
-  <nav class="span8">
-    <% if session[:state] == 0 %>
-      <form action="/new_player" method="post">
-        Name: <input type="text" name="player_name" value="Player1"/><br/>
-        <input type="submit" value="Play" class="btn btn-large"/>
-      </form>
-    <% end %>
-
-    <% if session[:state] == 1 %>
-      <form action="/bet" method="post">
-        <input type="text" name="bet_amount" placeholder="New Bet" class="input-mini"/>
-        <input type="submit" value="Bet" class="btn btn-large btn-inverse"/>
-      </form>
-      <form action="/re-bet" method="post">
-        <input type="submit" value="Re-Bet $<%=session[:prev_bet] %>" class="btn btn-large btn-inverse"/>
-      </form>
-    <% end %>
-
-    <% if session[:state] == 4 %>
-      <a href="/again" class="btn btn-large btn-inverse">Play Again</a>  
-      <a href="/" class="btn btn-large btn-inverse">Reset</a>  
-    <% end %>
-
-    <% if session[:state] == 2 %> 
-      <form id="hit_form" action="/game/player/hit" method='post'>
-      <input type="submit" class="btn btn-large btn-inverse" value="Hit" />
-      </form>
-      <form id="stay_form" action="/game/player/stay" method='post'>
-      <input type="submit" class="btn btn-large btn-inverse" value="Stay" />
-      </form>
-    <% end %>
-  </nav>
-</div>
+</section>

@@ -10,18 +10,66 @@
         <!--[if lt IE 9]>
           <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
+        <!--[if !IE 7]>
+        <style type="text/css">
+          #wrap {display:table;height:100%}
+        </style>
+      <![endif]-->
   </head>
   <body>
-  <div class="container-fluid">
-  <header class="row-fluid">
-    <div class="span11 offset1">
-      <a href="#" id="logo" class="pull-left texthide">Name</a>
-      <h1 id="main-title" class="pull-left">Blackjack</h1>
-    </div>
-  </header>
+  <div id="wrap">
+    <div id="main" class="container-fluid">
+      <header class="row-fluid">
+        <div class="span9 offset3">
+          <a href="#" id="logo" class="pull-left texthide">Name</a>
+          <h1 id="main-title" class="pull-left">Blackjack</h1>
+        </div>
+      </header>
       <%= yield %>
+    </div>
   </div>
+  <footer id="footer" class="row-fluid">
+    <div class="span8 offset4">
+        <ul class="chips pull-left">
+        <li><img src="/images/Poker_Chip_White_60.png" alt="poker chip"></li>
+        <li><img src="/images/Poker_Chip_Green_60.png" alt="poker chip"></li>
+        <li><img src="/images/Poker_Chip_Red_60.png" alt="poker chip"></li>
+        <li><img src="/images/Poker_Chip_Blue_60.png" alt="poker chip"></li>
+      </ul>
+      <nav class="pull-left">
+        <% if session[:state] == 0 %>
+          <form action="/new_player" method="post">
+            Name: <input type="text" name="player_name" value="Player1"/><br/>
+            <input type="submit" value="Play" class="btn btn-large"/>
+          </form>
+        <% end %>
 
+        <% if session[:state] == 1 %>
+          <form action="/bet" method="post">
+            <input type="text" name="bet_amount" placeholder="New Bet" class="input-mini"/>
+            <input type="submit" value="Bet" class="btn btn-large btn-inverse"/>
+          </form>
+          <form action="/re-bet" method="post">
+            <input type="submit" value="Re-Bet $<%=session[:prev_bet] %>" class="btn btn-large btn-inverse"/>
+          </form>
+        <% end %>
+
+        <% if session[:state] == 4 %>
+          <a href="/again" class="btn btn-large btn-inverse">Play Again</a>  
+          <a href="/" class="btn btn-large btn-inverse">Reset</a>  
+        <% end %>
+
+        <% if session[:state] == 2 %> 
+          <form id="hit_form" action="/game/player/hit" method='post'>
+          <input type="submit" class="btn btn-large btn-inverse" value="Hit" />
+          </form>
+          <form id="stay_form" action="/game/player/stay" method='post'>
+          <input type="submit" class="btn btn-large btn-inverse" value="Stay" />
+          </form>
+        <% end %>
+      </nav>
+    </div>
+  </footer>
   <script src="http://code.jquery.com/jquery-latest.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
   <script src="/js/jquery.arctext.js"></script>

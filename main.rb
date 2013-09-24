@@ -52,16 +52,18 @@ helpers do
 
   def winner!(msg)
     session[:player_pot] = session[:player_pot] + session[:player_bet]
-    @success = "<strong>#{session[:player_name]} wins!</strong> #{msg}"
+    @winner = "<strong>Win</strong>"
+    @dealer = "<strong>#{msg}</strong>"
   end
 
   def loser!(msg)
     session[:player_pot] = session[:player_pot] - session[:player_bet]
-    @error = "<strong>#{session[:player_name]} loses.</strong> #{msg}"
+    @loser = "<strong>#{msg}</strong>"
+    @dealer = "<strong>Win</strong>"
   end
 
-  def tie!(msg)
-    @success = "<strong>It's a tie!</strong> #{msg}"
+  def tie!
+    @tie = "<strong>Tie</strong>"
   end
 
   def create_deck
@@ -86,7 +88,8 @@ helpers do
   end
 
   def blackjack
-    winner!("#{session[:player_name]} hit blackjack.")
+    winner!("Lose")
+    @blackjack = "<strong>BLACKJACK</strong>"
     session[:state] = 4
   end
 
@@ -95,16 +98,13 @@ helpers do
   end
 
   def bust
-    loser!("It looks like #{session[:player_name]} busted at #{total(session[:player_cards])}.")
+    loser!("Bust")
     session[:state] = 4
   end
 
   def dealer_turn
     while total(session[:dealer_cards]) < DEALER_MIN_STAY
       session[:dealer_cards] << session[:deck].pop
-      if bust?(session[:dealer_cards])
-        winner!("Dealer busted at #{total(session[:dealer_cards])}.")
-      end
     end
   end
 
@@ -112,12 +112,14 @@ helpers do
     player_total = total(session[:player_cards])
     dealer_total = total(session[:dealer_cards])
 
-    if player_total == dealer_total
-      tie!("Both #{session[:player_name]} and the dealer stayed at #{player_total}.")
-    elsif player_total < dealer_total && dealer_total <= BLACKJACK_AMOUNT
-      loser!("#{session[:player_name]} stayed at #{player_total}, and the dealer stayed at #{dealer_total}.")
+    if dealer_total > BLACKJACK_AMOUNT
+      winner!("Bust")
+    elsif player_total == dealer_total
+      tie!
+    elsif player_total < dealer_total
+      loser!("Win")
     else
-      winner!("#{session[:player_name]} stayed at #{player_total}, and the dealer stayed at #{dealer_total}.")
+      winner!("Lose")
     end
   end
 end
@@ -151,7 +153,6 @@ post '/bet' do
     session[:state] = 2
     create_deck
     deal
-    blackjack if blackjack?
     redirect :game
   end
 end
@@ -161,11 +162,11 @@ post '/re-bet' do
     session[:state] = 2
     create_deck
     deal
-    blackjack if blackjack?
     redirect :game
 end
 
 get '/game' do
+  blackjack if blackjack?
   erb :game
 end
 

@@ -77,10 +77,14 @@ input[type="text"] {
 	min-height: 10px !important; height: 35px ;
 }
 
+#wrap {
+	min-height: 100%;
+}
+
 #logo {
 	width: 150px;
 	height: 150px;
-	padding-top: 15px;
+	margin-top: 30px;
 	background: url(/images/spade.png) bottom no-repeat;
 	-webkit-transition: opacity .2s ease-in-out;
 	-moz-transition: opacity .2s ease-in-out;
@@ -95,7 +99,8 @@ input[type="text"] {
 
 h1#main-title {
 	font: normal 130px "Blackjack", Tahoma, Arial, sans-serif;
-	padding-left: 10%;
+	margin-left: 40px;
+	margin-top: 15px;
 }
 
 .card {
@@ -108,7 +113,8 @@ h1#main-title {
 	box-shadow:         2px 2px 5px rgba(50, 50, 50, 0.75);
 }
 .card-area {
-	height: 250px;
+	position: relative;
+	height: 180px;
 }
 
 ul.cards ul{
@@ -118,14 +124,13 @@ ul.cards ul{
 }
 ul.cards li {
 	position: relative;
-	height: 120px;
-	width: 83px;
+	width: 100px;
 }
 
 p.score {
-	position: relative;
-	top: 0;
-	left: -5px;
+	position: absolute;
+	top: 15px;
+	left: -40px;
 	z-index: 9999;
 	text-align: center;
 	line-height: 50px;
@@ -147,13 +152,37 @@ p.score {
 	text-shadow: #fff 0px 0.5px 1px, #000 0 1px 1px;
 }
 
-ul.chips ul{
-	position: absolute;  
-	top: -13px;
-	left: -20px;   
-}
 ul.chips li {
-	position: relative;
-	height: 43px;
-	width: 101px;
+	display: inline;
+}
+
+html, body {height: 100%;}
+
+#wrap {min-height: 100%;}
+
+#main {overflow:auto;
+	padding-bottom: 70px;}  /* must be same height as the footer */
+
+#footer {position: relative;
+	margin-top: -70px; /* negative value of footer height */
+	height: 70px;
+	clear:both;} 
+
+/*Opera Fix*/
+body:before {
+	content:"";
+	height:100%;
+	float:left;
+	width:0;
+	margin-top:-32767px;/
+}
+
+.alert {
+	opacity: .9;
+	position: absolute;
+	left: 40px;
+	top: 20px;
+	z-index: 10;
+	padding: 0 20px;
+	margin: 0;
 }
