@@ -117,7 +117,7 @@ helpers do
     elsif player_total == dealer_total
       tie!
     elsif player_total < dealer_total
-      loser!("Win")
+      loser!("Lose")
     else
       winner!("Lose")
     end
@@ -141,15 +141,21 @@ get '/bet' do
   erb :game
 end
 
+get '/bet_amount' do
+  session[:bet_amount] = session[:bet_amount].to_i + params[:bet_add].to_i
+  puts "#{session[:bet_amount]}"
+  erb :game
+end
+
 post '/bet' do
-  if params[:bet_amount].nil? || params[:bet_amount].to_i == 0
+  if session[:bet_amount].nil? || session[:bet_amount].to_i == 0
     @error = "Must make a bet."
     halt erb(:game)
-  elsif params[:bet_amount].to_i > session[:player_pot]
+  elsif session[:bet_amount].to_i > session[:player_pot]
     @error = "Bet amount cannot be greater than what you have ($#{session[:player_pot]})"
     halt erb(:game)
   else #happy path
-    session[:player_bet] = params[:bet_amount].to_i
+    session[:player_bet] = session[:bet_amount]
     session[:state] = 2
     create_deck
     deal
@@ -186,6 +192,8 @@ end
 
 get '/again' do
   session[:prev_bet] = session[:player_bet]
+  session[:bet_amount] = 0
+  session[:player_bet] = 0
   session[:state] = 1
   redirect :bet
 end

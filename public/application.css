@@ -77,10 +77,6 @@ input[type="text"] {
 	min-height: 10px !important; height: 35px ;
 }
 
-#wrap {
-	min-height: 100%;
-}
-
 #logo {
 	width: 150px;
 	height: 150px;
@@ -114,7 +110,10 @@ h1#main-title {
 }
 .card-area {
 	position: relative;
-	height: 180px;
+	left: 20px;
+	top: -50px;
+	height: 140px;
+	margin-bottom: 20px;
 }
 
 ul.cards ul{
@@ -124,7 +123,7 @@ ul.cards ul{
 }
 ul.cards li {
 	position: relative;
-	width: 100px;
+	width: 80px;
 }
 
 p.score {
@@ -153,7 +152,28 @@ p.score {
 }
 
 ul.chips li {
-	display: inline;
+	float: left;
+}
+
+ul.chips li a {
+	background: url(/images/Poker_Chip_White_60.png) bottom no-repeat;
+	width: 62px;
+	height: 62px;
+}
+
+#bet-area {
+	height: 120px;
+	width: 120px;
+	border: 8px solid white;
+	opacity: .3;
+	margin: 0 auto;
+	-webkit-border-radius: 100px;
+	-moz-border-radius: 100px;
+	border-radius: 100px;
+}
+
+nav {
+	margin-top: 8px;
 }
 
 html, body {height: 100%;}

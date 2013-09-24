@@ -31,7 +31,7 @@
   <footer id="footer" class="row-fluid">
     <div class="span8 offset4">
         <ul class="chips pull-left">
-        <li><img src="/images/Poker_Chip_White_60.png" alt="poker chip"></li>
+        <li><a href="/bet_amount?bet_add=5"></a></li>
         <li><img src="/images/Poker_Chip_Green_60.png" alt="poker chip"></li>
         <li><img src="/images/Poker_Chip_Red_60.png" alt="poker chip"></li>
         <li><img src="/images/Poker_Chip_Blue_60.png" alt="poker chip"></li>
@@ -39,19 +39,20 @@
       <nav class="pull-left">
         <% if session[:state] == 0 %>
           <form action="/new_player" method="post">
-            Name: <input type="text" name="player_name" value="Player1"/><br/>
+            <input type="text" name="player_name" value="Player1"/>
             <input type="submit" value="Play" class="btn btn-large"/>
           </form>
         <% end %>
 
         <% if session[:state] == 1 %>
           <form action="/bet" method="post">
-            <input type="text" name="bet_amount" placeholder="New Bet" class="input-mini"/>
             <input type="submit" value="Bet" class="btn btn-large btn-inverse"/>
           </form>
-          <form action="/re-bet" method="post">
-            <input type="submit" value="Re-Bet $<%=session[:prev_bet] %>" class="btn btn-large btn-inverse"/>
-          </form>
+          <% if session[:prev_bet] %>
+            <form action="/re-bet" method="post">
+              <input type="submit" value="Re-Bet $<%=session[:prev_bet] %>" class="btn btn-large btn-inverse"/>
+            </form>
+          <% end %>
         <% end %>
 
         <% if session[:state] == 4 %>
