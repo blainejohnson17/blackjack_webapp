@@ -156,9 +156,24 @@ ul.chips li {
 }
 
 ul.chips li a {
-	background: url(/images/Poker_Chip_White_60.png) bottom no-repeat;
 	width: 62px;
 	height: 62px;
+}
+
+ul.chips li a {
+	background: url(/images/Poker_Chip_White_60.png) bottom no-repeat;
+}
+
+ul.chips li a:nth-child(2) {
+	background: url(/images/Poker_Chip_Green_60.png) bottom no-repeat;
+}
+
+ul.chips li a:nth-child(3) {
+	background: url(/images/Poker_Chip_Red_60.png) bottom no-repeat;
+}
+
+ul.chips li a:nth-child(4) {
+	background: url(/images/Poker_Chip_Blue_60.png) bottom no-repeat;
 }
 
 #bet-area {
