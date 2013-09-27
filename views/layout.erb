@@ -7,10 +7,10 @@
     <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap-responsive.css">
     <link rel="stylesheet" href="/application.css">
     <!-- HTML5 shim for IE backwards compatibility -->
-        <!--[if lt IE 9]>
-          <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
-        <!--[if !IE 7]>
+      <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+      <![endif]-->
+      <!--[if !IE 7]>
         <style type="text/css">
           #wrap {display:table;height:100%}
         </style>
@@ -21,7 +21,7 @@
     <div id="main" class="container-fluid">
       <header class="row-fluid">
         <div class="span9 offset3">
-          <a href="#" id="logo" class="pull-left texthide">Name</a>
+          <a href="/" id="logo" class="pull-left texthide">Name</a>
           <h1 id="main-title" class="pull-left">Blackjack</h1>
         </div>
       </header>
@@ -31,10 +31,10 @@
   <footer id="footer" class="row-fluid">
     <div class="span8 offset4">
       <ul class="chips pull-left">
-        <li><a href="/bet_amount?bet_add=5"></a></li>
-        <li><a href="/bet_amount?bet_add=10"></a></li>
-        <li><a href="/bet_amount?bet_add=25"></a></li>
-        <li><a href="/bet_amount?bet_add=50"></a></li>
+        <li><a href="/bet_amount?bet_add=5">5</a></li>
+        <li><a href="/bet_amount?bet_add=10">10</a></li>
+        <li><a href="/bet_amount?bet_add=25">25</a></li>
+        <li><a href="/bet_amount?bet_add=50">50</a></li>
       </ul>
       <nav class="pull-left">
         <% if session[:state] == 0 %>
@@ -46,7 +46,7 @@
 
         <% if session[:state] == 1 %>
           <form action="/bet" method="post">
-            <input type="submit" value="Bet" class="btn btn-large btn-inverse"/>
+            <input type="submit" value="Place Bet" class="btn btn-large btn-inverse"/>
           </form>
           <% if session[:prev_bet] %>
             <form action="/re-bet" method="post">
