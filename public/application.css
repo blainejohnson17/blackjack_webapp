@@ -81,7 +81,7 @@ ul.cards li {
 	width: 80px;
 }
 
-p.score {
+p.score, p.pot {
 	position: absolute;
 	top: 15px;
 	left: -40px;
@@ -135,7 +135,12 @@ ul.chips li:nth-child(4) a {
 	background: url(/images/Poker_Chip_Blue_60.png) bottom no-repeat;
 }
 
+#bet {
+	position: relative;
+}
+
 #bet-area {
+	position: relative;
 	height: 120px;
 	width: 120px;
 	border: 8px solid white;
@@ -159,11 +164,11 @@ html, body {height: 100%;}
 #wrap {min-height: 100%;}
 
 #main {overflow:auto;
-	padding-bottom: 75px;}  /* must be same height as the footer */
+	padding-bottom: 80px;}  /* must be same height as the footer */
 
 #footer {position: relative;
-	margin-top: -75px; /* negative value of footer height */
-	height: 75px;
+	margin-top: -80px; /* negative value of footer height */
+	height: 80px;
 	clear:both;} 
 
 /*Opera Fix*/
