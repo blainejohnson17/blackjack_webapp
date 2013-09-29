@@ -1,7 +1,7 @@
 <div class="row-fluid">
   <div class="card-area span7 offset5">
     <% if session[:state] > 1 %>
-      <p class="score pull-left"><%= total(session[:dealer_cards])%></p>
+      <span class="score pull-left"><%= total(session[:dealer_cards])%></span>
       <% if @winner %>
         <div class="alert alert-error"><h2><%=@dealer%></h2></div>
       <% elsif @loser %>
@@ -26,9 +26,9 @@
   </div>
 </div>
 <div class="row-fluid">
-  <div class="card-area span7 offset5">
+  <div class="card-area span2 offset5">
     <% if session[:state] > 1 %>
-      <p class="score pull-left"><%= total(session[:player_cards])%></p>
+      <span class="score pull-left"><%= total(session[:player_cards])%></span>
       <% if @winner %>
         <div class="alert alert-success"><h2><%=@winner%></h2></div>
       <% elsif @loser %>
@@ -51,8 +51,9 @@
     <% end %>
   </div>
 </div>
-<div id="bet" class="row-fluid">
-  <p class="pot span1 offset4"><%= session[:player_pot]%></p>
-  <div id="bet-area">
+<div class="row-fluid">
+  <div id="bet" class="span2 offset5">
+    <span id="bet-amount" class="pull-left">$<%= session[:bet_amount]%></span>
+    <div id="bet-area"class="pull-left"></div>
   </div>
 </div>

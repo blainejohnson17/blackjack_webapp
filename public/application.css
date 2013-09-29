@@ -81,10 +81,10 @@ ul.cards li {
 	width: 80px;
 }
 
-p.score, p.pot {
+span.score, span#bet-amount, span#pot {
 	position: absolute;
-	top: 15px;
-	left: -40px;
+	top: 0px;
+	left: -60px;
 	z-index: 9999;
 	text-align: center;
 	line-height: 50px;
@@ -98,7 +98,7 @@ p.score, p.pot {
     -webkit-box-shadow: inset 0 0 7px #000000;
     box-shadow:         inset 0 0 7px #000000;
 	height: 50px;
-	width: 50px;
+	min-width: 50px;
 	margin: 10px;
 	background: #000;
 	background: rgba(0, 0, 0, .5);
@@ -141,6 +141,7 @@ ul.chips li:nth-child(4) a {
 
 #bet-area {
 	position: relative;
+	left: 20px;
 	height: 120px;
 	width: 120px;
 	border: 8px solid white;
@@ -149,6 +150,10 @@ ul.chips li:nth-child(4) a {
 	-webkit-border-radius: 100px;
 	-moz-border-radius: 100px;
 	border-radius: 100px;
+}
+
+#nav {
+	position: relative;
 }
 
 nav {

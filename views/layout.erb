@@ -29,7 +29,8 @@
     </div>
   </div>
   <footer id="footer" class="row-fluid">
-    <div class="span8 offset4">
+    <div  id="nav" class="span8 offset4">
+    <span id="bet-amount" class="pull-left">$<%= session[:player_pot]%></span>
       <ul class="chips pull-left">
         <li><a href="/bet_amount?bet_add=5">5</a></li>
         <li><a href="/bet_amount?bet_add=10">10</a></li>

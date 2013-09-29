@@ -142,6 +142,7 @@ get '/bet' do
 end
 
 get '/bet_amount' do
+  halt erb(:game) if session[:state] != 1
   session[:bet_amount] = session[:bet_amount].to_i + params[:bet_add].to_i
   puts "#{session[:bet_amount]}"
   erb :game
@@ -164,7 +165,7 @@ post '/bet' do
 end
 
 post '/re-bet' do
-    session[:player_bet] = session[:prev_bet]
+    session[:player_bet] = session[:bet_amount] = session[:prev_bet]
     session[:state] = 2
     create_deck
     deal
