@@ -173,7 +173,9 @@ post '/re-bet' do
 end
 
 get '/game' do
-  blackjack if blackjack?
+  if blackjack?
+    total(session[:dealer_cards]) == BLACKJACK_AMOUNT ? tie! : blackjack
+  end
   erb :game
 end
 

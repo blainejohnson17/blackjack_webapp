@@ -6,6 +6,8 @@
         <div class="alert alert-error"><h2><%=@dealer%></h2></div>
       <% elsif @loser %>
         <div class="alert alert-success"><h2><%=@dealer%></h2></div>
+      <% elsif @tie %>
+        <div class="alert alert-success"><h2><%=@tie%></h2></div>
       <% end %>
       <% count = 1 %>
       <% session[:dealer_cards].each_with_index do |card, i| %>
@@ -33,9 +35,10 @@
         <div class="alert alert-success"><h2><%=@winner%></h2></div>
       <% elsif @loser %>
         <div class="alert alert-error"><h2><%=@loser%></h2></div>
-      <% end %>
-      <% if @blackjack %>
-      <div class="alert alert-success"><h1><%=@blackjack%></h1></div>
+      <% elsif @blackjack %>
+        <div class="alert alert-success"><h2><%=@blackjack%></h2></div>
+      <% elsif @tie %>
+        <div class="alert alert-success"><h2><%=@tie%></h2></div>
       <% end %>
       <% count = 1 %>
       <% session[:player_cards].each do |card| %>
