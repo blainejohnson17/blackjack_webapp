@@ -8,8 +8,8 @@ DEALER_MIN_STAY = 17
 INITIAL_POT_AMOUNT = 500
 
 helpers do
-  def total(cards) # cards is [["H", "3"], ["D", "J"], ... ]
-    arr = cards.map{|element| element[1]}
+  def total(cards, flop=false) # cards is [["H", "3"], ["D", "J"], ... ]
+    arr = flop && session[:state] < 3 ? [cards.first].map{|e| e[1]} : cards.map{|e| e[1]}
 
     total = 0
     arr.each do |a|

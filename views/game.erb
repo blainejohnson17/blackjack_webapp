@@ -1,7 +1,7 @@
 <div class="row-fluid">
   <div class="card-area span7 offset5">
     <% if session[:state] > 1 %>
-      <span class="score pull-left"><%= total(session[:dealer_cards])%></span>
+      <span class="score pull-left"><%= total(session[:dealer_cards], true)%></span>
       <% if @winner %>
         <div class="alert alert-error"><h2><%=@dealer%></h2></div>
       <% elsif @loser %>
@@ -11,7 +11,7 @@
       <% session[:dealer_cards].each_with_index do |card, i| %>
         <ul class="cards pull-left">
           <li>
-        <% if session[:state] < 3 && i == 0 %>
+        <% if session[:state] < 3 && i == 1 %>
           <img src="/images/cards/cover.jpg" class="card">
         <% else %>
           <img src="<%= card_image(card) %>" class="card">
@@ -54,6 +54,6 @@
 <div class="row-fluid">
   <div id="bet" class="span2 offset5">
     <span id="bet-amount" class="pull-left">$<%= session[:bet_amount]%></span>
-    <div id="bet-area"class="pull-left"></div>
+    <div id="bet-area" class="pull-left"></div>
   </div>
 </div>
