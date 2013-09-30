@@ -32,10 +32,10 @@
     <div  id="nav" class="span8 offset4">
     <span id="bet-amount" class="pull-left">$<%= session[:player_pot]%></span>
       <ul class="chips pull-left">
-        <li><a href="/bet_amount?bet_add=5">5</a></li>
-        <li><a href="/bet_amount?bet_add=10">10</a></li>
-        <li><a href="/bet_amount?bet_add=25">25</a></li>
-        <li><a href="/bet_amount?bet_add=50">50</a></li>
+        <li><a href="/bet_amount?bet_add=<%= session[:chip_1]%>"><%= session[:chip_1]%></a></li>
+        <li><a href="/bet_amount?bet_add=<%= session[:chip_2]%>"><%= session[:chip_2]%></a></li>
+        <li><a href="/bet_amount?bet_add=<%= session[:chip_3]%>"><%= session[:chip_3]%></a></li>
+        <li><a href="/bet_amount?bet_add=<%= session[:chip_4]%>"><%= session[:chip_4]%></a></li>
       </ul>
       <nav class="pull-left">
         <% if session[:state] == 0 %>
@@ -73,7 +73,10 @@
     </div>
   </footer>
   <script src="http://code.jquery.com/jquery-latest.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
   <script src="/js/jquery.arctext.js"></script>
+  <script src="/js/jquery.cookie.js"></script>
+  <script src="/application.js"></script>
   </body>
 </html>

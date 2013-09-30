@@ -1,62 +1,64 @@
-<div class="row-fluid">
-  <div class="card-area span7 offset5">
-    <% if session[:state] > 1 %>
-      <span class="score pull-left"><%= total(session[:dealer_cards], true)%></span>
-      <% if @winner %>
-        <div class="alert alert-error"><h2><%=@dealer%></h2></div>
-      <% elsif @loser %>
-        <div class="alert alert-success"><h2><%=@dealer%></h2></div>
-      <% elsif @tie %>
-        <div class="alert alert-success"><h2><%=@tie%></h2></div>
-      <% end %>
-      <% count = 1 %>
-      <% session[:dealer_cards].each_with_index do |card, i| %>
-        <ul class="cards pull-left">
-          <li>
-        <% if session[:state] < 3 && i == 1 %>
-          <img src="/images/cards/cover.jpg" class="card">
-        <% else %>
-          <img src="<%= card_image(card) %>" class="card">
+<div id="game">
+  <div class="row-fluid">
+    <div class="card-area span7 offset5">
+      <% if session[:state] > 1 %>
+        <span class="score pull-left"><%= total(session[:dealer_cards], true)%></span>
+        <% if @winner %>
+          <div class="alert alert-error"><h2><%=@dealer%></h2></div>
+        <% elsif @loser %>
+          <div class="alert alert-success"><h2><%=@dealer%></h2></div>
+        <% elsif @tie %>
+          <div class="alert alert-success"><h2><%=@tie%></h2></div>
         <% end %>
-        <% count += 1 %>
-      <% end %>
-      <% count.times do %>
-          </li>
-        </ul>
-      <% end %>
-    <% end %>
-  </div>
-</div>
-<div class="row-fluid">
-  <div class="card-area span2 offset5">
-    <% if session[:state] > 1 %>
-      <span class="score pull-left"><%= total(session[:player_cards])%></span>
-      <% if @winner %>
-        <div class="alert alert-success"><h2><%=@winner%></h2></div>
-      <% elsif @loser %>
-        <div class="alert alert-error"><h2><%=@loser%></h2></div>
-      <% elsif @blackjack %>
-        <div class="alert alert-success"><h2><%=@blackjack%></h2></div>
-      <% elsif @tie %>
-        <div class="alert alert-success"><h2><%=@tie%></h2></div>
-      <% end %>
-      <% count = 1 %>
-      <% session[:player_cards].each do |card| %>
-        <ul class="cards pull-left">
-          <li>
+        <% count = 1 %>
+        <% session[:dealer_cards].each_with_index do |card, i| %>
+          <ul class="cards pull-left">
+            <li>
+          <% if session[:state] < 3 && i == 1 %>
+            <img src="/images/cards/cover.jpg" class="card">
+          <% else %>
             <img src="<%= card_image(card) %>" class="card">
-        <% count += 1 %>
+          <% end %>
+          <% count += 1 %>
+        <% end %>
+        <% count.times do %>
+            </li>
+          </ul>
+        <% end %>
       <% end %>
-      <% count.times do %>
-          </li>
-        </ul>
-      <% end %>
-    <% end %>
+    </div>
   </div>
-</div>
-<div class="row-fluid">
-  <div id="bet" class="span2 offset5">
-    <span id="bet-amount" class="pull-left">$<%= session[:bet_amount]%></span>
-    <div id="bet-area" class="pull-left"></div>
+  <div class="row-fluid">
+    <div class="card-area span2 offset5">
+      <% if session[:state] > 1 %>
+        <span class="score pull-left"><%= total(session[:player_cards])%></span>
+        <% if @winner %>
+          <div class="alert alert-success"><h2><%=@winner%></h2></div>
+        <% elsif @loser %>
+          <div class="alert alert-error"><h2><%=@loser%></h2></div>
+        <% elsif @blackjack %>
+          <div class="alert alert-success"><h2><%=@blackjack%></h2></div>
+        <% elsif @tie %>
+          <div class="alert alert-success"><h2><%=@tie%></h2></div>
+        <% end %>
+        <% count = 1 %>
+        <% session[:player_cards].each do |card| %>
+          <ul class="cards pull-left">
+            <li>
+              <img src="<%= card_image(card) %>" class="card">
+          <% count += 1 %>
+        <% end %>
+        <% count.times do %>
+            </li>
+          </ul>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  <div class="row-fluid">
+    <div id="bet" class="span2 offset5">
+      <span id="bet-amount" class="pull-left">$<%= session[:bet_amount]%></span>
+      <div id="bet-area" class="pull-left"></div>
+    </div>
   </div>
 </div>

@@ -6,6 +6,10 @@ set :sessions, true
 BLACKJACK_AMOUNT = 21
 DEALER_MIN_STAY = 17
 INITIAL_POT_AMOUNT = 500
+CHIP_1_VAL = 5
+CHIP_2_VAL = 10
+CHIP_3_VAL = 25
+CHIP_4_VAL = 50
 
 helpers do
   def total(cards, flop=false) # cards is [["H", "3"], ["D", "J"], ... ]
@@ -127,13 +131,19 @@ end
 get '/' do
   session.clear
   session[:state] = 0
+  response.set_cookie 'state', session[:state]
   session[:player_pot] = INITIAL_POT_AMOUNT
+  session[:chip_1] = CHIP_1_VAL
+  session[:chip_2] = CHIP_2_VAL
+  session[:chip_3] = CHIP_3_VAL
+  session[:chip_4] = CHIP_4_VAL
   erb :game
 end
 
 post '/new_player' do
   session[:player_name] = params[:player_name]
   session[:state] = 1
+  response.set_cookie 'state', session[:state]
   redirect '/bet'
 end
 
@@ -144,8 +154,7 @@ end
 get '/bet_amount' do
   halt erb(:game) if session[:state] != 1
   session[:bet_amount] = session[:bet_amount].to_i + params[:bet_add].to_i
-  puts "#{session[:bet_amount]}"
-  erb :game
+  erb :game, layout: false
 end
 
 post '/bet' do
@@ -158,6 +167,7 @@ post '/bet' do
   else #happy path
     session[:player_bet] = session[:bet_amount]
     session[:state] = 2
+    response.set_cookie 'state', session[:state]
     create_deck
     deal
     redirect :game
@@ -198,5 +208,6 @@ get '/again' do
   session[:bet_amount] = 0
   session[:player_bet] = 0
   session[:state] = 1
+  response.set_cookie 'state', session[:state]
   redirect :bet
 end
