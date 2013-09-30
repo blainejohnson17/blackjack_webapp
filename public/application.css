@@ -18,6 +18,10 @@ ol,ul { list-style: none; }
 
 .texthide { text-indent: -9999em; }
 
+.absolute {
+	position: absolute;
+}
+
 body {
 	background: url(/images/pool_table2.png) repeat;
 	color: #000;
@@ -29,6 +33,12 @@ form {
 input[type="text"] { 
 	margin-bottom: 0 !important;
 	min-height: 10px !important; height: 35px ;
+}
+
+#main {
+	position: relative;
+	margin: 0;
+	padding: 0;
 }
 
 #logo {
@@ -53,6 +63,27 @@ h1#main-title {
 	margin-top: 15px;
 }
 
+#table-text {
+	font: normal 80px "Times New Roman", Times, serif;
+	color: white;
+	opacity: .8;
+}
+
+.arc-text {
+	font: normal 37px Arial, Helvetica, sans-serif;
+	letter-spacing: 3px;
+	color: white;
+	opacity: .8;
+}
+
+#stand {
+	top: 340px;
+}
+
+#insurance {
+	top: 400px;
+}
+
 .card {
 	border: 1px solid grey;
 	-webkit-border-radius: 5px;
@@ -66,7 +97,7 @@ h1#main-title {
 .card-area {
 	position: relative;
 	left: 20px;
-	top: -50px;
+	top: -10px;
 	height: 140px;
 	margin-bottom: 20px;
 }
@@ -80,12 +111,18 @@ ul.cards li {
 	position: relative;
 	width: 80px;
 }
-
-span.score, span#bet-amount, span#pot {
+span.score {
 	position: absolute;
 	top: 0px;
 	left: -60px;
 	z-index: 9999;
+}
+
+span#pot, span#bet-amount {
+	
+}
+
+span.score, span#bet-amount, span#pot {
 	text-align: center;
 	line-height: 50px;
 	font-size: 32px;
@@ -102,41 +139,58 @@ span.score, span#bet-amount, span#pot {
 	margin: 10px;
 	background: #000;
 	background: rgba(0, 0, 0, .5);
-	color: rgba(48, 48, 48, .7);
+	color: rgba(250, 250, 250, .7);
 	text-shadow: #fff 0px 0.5px 1px, #000 0 1px 1px;
 }
 
-ul.chips li {
+span#pot, span#bet-amount, nav {
+	position: relative;
+	top: 85px;
+	left: 30px;
+	margin: 0 10px;
+}
+
+nav input[type="text"] {
+	width: 120px;
+}
+
+ul#chips {
+	margin: 0 0 0 50px;
+}
+
+ul#chips li {
 	float: left;
 }
 
-ul.chips li a {
+ul#chips li a {
 	width: 62px;
 	height: 62px;
+	margin-left: 20px;
 	display: block;
 	text-align: center;
 	text-decoration: none;
 	line-height: 62px;
 }
 
-ul.chips li:nth-child(1) a {
+ul#chips li:nth-child(1) a {
 	background: url(/images/Poker_Chip_White_60.png) bottom no-repeat;
 }
 
-ul.chips li:nth-child(2) a {
+ul#chips li:nth-child(2) a {
 	background: url(/images/Poker_Chip_Green_60.png) bottom no-repeat;
 }
 
-ul.chips li:nth-child(3) a {
+ul#chips li:nth-child(3) a {
 	background: url(/images/Poker_Chip_Red_60.png) bottom no-repeat;
 }
 
-ul.chips li:nth-child(4) a {
+ul#chips li:nth-child(4) a {
 	background: url(/images/Poker_Chip_Blue_60.png) bottom no-repeat;
 }
 
 #bet {
 	position: relative;
+	left: -20px;
 }
 
 #bet-area {
@@ -152,18 +206,6 @@ ul.chips li:nth-child(4) a {
 	border-radius: 100px;
 }
 
-#nav {
-	position: relative;
-}
-
-nav {
-	margin-top: 8px;
-}
-
-nav input[type="text"] {
-	width: 120px;
-}
-
 html, body {height: 100%;}
 
 #wrap {min-height: 100%;}
@@ -171,10 +213,16 @@ html, body {height: 100%;}
 #main {overflow:auto;
 	padding-bottom: 80px;}  /* must be same height as the footer */
 
-#footer {position: relative;
+#footer {
+	position: relative;
 	margin-top: -80px; /* negative value of footer height */
 	height: 80px;
-	clear:both;} 
+	clear:both;
+}
+
+#footer div {
+	position: relative;
+}
 
 /*Opera Fix*/
 body:before {

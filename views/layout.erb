@@ -25,51 +25,32 @@
           <h1 id="main-title" class="pull-left">Blackjack</h1>
         </div>
       </header>
+      <div id="blackjack" class="absolute row-fluid">
+        <div class="span12">
+          <h2 id="table-text" class="text-center">Pays 3-2</h2>
+        </div>
+      </div>
+      <div id="stand" class="absolute row-fluid">
+        <div class="span12">
+          <h2 class="arc-text text-center">Dealer must stand on 17</h2>
+        </div>
+      </div>
+      <div id="insurance" class="absolute row-fluid">
+        <div class="span12">
+          <h2 class="arc-text text-center">Pays 2-1  Insurance Pays  2-1</h2>
+        </div>
+      </div>
       <%= yield %>
     </div>
   </div>
   <footer id="footer" class="row-fluid">
-    <div  id="nav" class="span8 offset4">
-    <span id="bet-amount" class="pull-left">$<%= session[:player_pot]%></span>
-      <ul class="chips pull-left">
+    <div class="span4 offset4">
+      <ul id="chips" class="pull-left">
         <li><a href="/bet_amount?bet_add=<%= session[:chip_1]%>"><%= session[:chip_1]%></a></li>
         <li><a href="/bet_amount?bet_add=<%= session[:chip_2]%>"><%= session[:chip_2]%></a></li>
         <li><a href="/bet_amount?bet_add=<%= session[:chip_3]%>"><%= session[:chip_3]%></a></li>
         <li><a href="/bet_amount?bet_add=<%= session[:chip_4]%>"><%= session[:chip_4]%></a></li>
       </ul>
-      <nav class="pull-left">
-        <% if session[:state] == 0 %>
-          <form action="/new_player" method="post">
-            <input type="text" name="player_name" value="Player1"/>
-            <input type="submit" value="Play" class="btn btn-large"/>
-          </form>
-        <% end %>
-
-        <% if session[:state] == 1 %>
-          <form action="/bet" method="post">
-            <input type="submit" value="Place Bet" class="btn btn-large btn-inverse"/>
-          </form>
-          <% if session[:prev_bet] %>
-            <form action="/re-bet" method="post">
-              <input type="submit" value="Re-Bet $<%=session[:prev_bet] %>" class="btn btn-large btn-inverse"/>
-            </form>
-          <% end %>
-        <% end %>
-
-        <% if session[:state] == 4 %>
-          <a href="/again" class="btn btn-large btn-inverse">Play Again</a>  
-          <a href="/" class="btn btn-large btn-inverse">Reset</a>  
-        <% end %>
-
-        <% if session[:state] == 2 %> 
-          <form id="hit_form" action="/game/player/hit" method='post'>
-          <input type="submit" class="btn btn-large btn-inverse" value="Hit" />
-          </form>
-          <form id="stay_form" action="/game/player/stay" method='post'>
-          <input type="submit" class="btn btn-large btn-inverse" value="Stay" />
-          </form>
-        <% end %>
-      </nav>
     </div>
   </footer>
   <script src="http://code.jquery.com/jquery-latest.js"></script>

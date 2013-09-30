@@ -148,7 +148,7 @@ post '/new_player' do
 end
 
 get '/bet' do
-  erb :game
+  erb :game, layout: false
 end
 
 get '/bet_amount' do
@@ -174,7 +174,7 @@ post '/bet' do
   end
 end
 
-post '/re-bet' do
+post '/rebet' do
     session[:player_bet] = session[:bet_amount] = session[:prev_bet]
     session[:state] = 2
     create_deck
@@ -186,13 +186,13 @@ get '/game' do
   if blackjack?
     total(session[:dealer_cards]) == BLACKJACK_AMOUNT ? tie! : blackjack
   end
-  erb :game
+  erb :game, layout: false
 end
 
 post '/game/player/hit' do
   session[:player_cards] << session[:deck].pop
   bust if bust?(session[:player_cards])
-  erb :game
+  erb :game, layout: false
 end
 
 post '/game/player/stay' do
@@ -200,7 +200,7 @@ post '/game/player/stay' do
   dealer_turn
   who_won
   session[:state] = 4
-  erb :game
+  erb :game, layout: false
 end
 
 get '/again' do
