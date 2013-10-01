@@ -47,9 +47,9 @@ input[type="text"] {
 	margin-top: 30px;
 	background: url(/images/spade.png) bottom no-repeat;
 	-webkit-transition: opacity .2s ease-in-out;
-	-moz-transition: opacity .2s ease-in-out;
-	-o-transition: opacity .2s ease-in-out;
-	transition: opacity .2s ease-in-out;
+	-moz-transition: 	opacity .2s ease-in-out;
+	-o-transition: 		opacity .2s ease-in-out;
+	transition: 		opacity .2s ease-in-out;
 	
 }
 
@@ -84,21 +84,11 @@ h1#main-title {
 	top: 400px;
 }
 
-.card {
-	border: 1px solid grey;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
-	-webkit-box-shadow: 2px 2px 5px rgba(50, 50, 50, 0.75);
-	-moz-box-shadow:    2px 2px 5px rgba(50, 50, 50, 0.75);
-	box-shadow:         2px 2px 5px rgba(50, 50, 50, 0.75);
-}
-
 .card-area {
 	position: relative;
 	left: 20px;
 	top: -10px;
-	height: 140px;
+	height: 220px;
 	margin-bottom: 20px;
 }
 
@@ -109,20 +99,24 @@ ul.cards ul{
 }
 ul.cards li {
 	position: relative;
-	width: 80px;
+	width: 110px;
 }
+
+.card {
+	border: 1px solid grey;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	-webkit-box-shadow: 2px 2px 5px rgba(50, 50, 50, 0.75);
+	-moz-box-shadow:    2px 2px 5px rgba(50, 50, 50, 0.75);
+	box-shadow:         2px 2px 5px rgba(50, 50, 50, 0.75);
+}
+
 span.score {
 	position: absolute;
 	top: 0px;
 	left: -60px;
 	z-index: 9999;
-}
-
-span#pot, span#bet-amount {
-	
-}
-
-span.score, span#bet-amount, span#pot {
 	text-align: center;
 	line-height: 50px;
 	font-size: 32px;
@@ -143,19 +137,12 @@ span.score, span#bet-amount, span#pot {
 	text-shadow: #fff 0px 0.5px 1px, #000 0 1px 1px;
 }
 
-span#pot, span#bet-amount, nav {
-	position: relative;
-	top: 85px;
-	left: 30px;
-	margin: 0 10px;
-}
-
 nav input[type="text"] {
 	width: 120px;
 }
 
 ul#chips {
-	margin: 0 0 0 50px;
+	margin: 0;
 }
 
 ul#chips li {
@@ -165,7 +152,7 @@ ul#chips li {
 ul#chips li a {
 	width: 62px;
 	height: 62px;
-	margin-left: 20px;
+	margin: 3px 4px 0;
 	display: block;
 	text-align: center;
 	text-decoration: none;
@@ -191,19 +178,6 @@ ul#chips li:nth-child(4) a {
 #bet {
 	position: relative;
 	left: -20px;
-}
-
-#bet-area {
-	position: relative;
-	left: 20px;
-	height: 120px;
-	width: 120px;
-	border: 8px solid white;
-	opacity: .3;
-	margin: 0 auto;
-	-webkit-border-radius: 100px;
-	-moz-border-radius: 100px;
-	border-radius: 100px;
 }
 
 html, body {height: 100%;}
