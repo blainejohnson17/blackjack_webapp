@@ -12,7 +12,7 @@
       <![endif]-->
   </head>
   <body>
-    <div class="container-fluid">
+    <div id="main" class="container-fluid">
       <header class="row-fluid">
         <div class="span9 offset3">
           <a href="/" id="logo" class="pull-left texthide">Ace</a>
@@ -30,11 +30,6 @@
             <h2 class="arc-text text-center">Dealer must stand on 17</h2>
           </div>
         </div>
-        <div id="insurance" class="row-fluid">
-          <div class="span12">
-            <h2 class="arc-text text-center">Pays 2-1  Insurance Pays  2-1</h2>
-          </div>
-        </div>
       </div>
       <%= yield %>
     </div>
@@ -42,7 +37,6 @@
   <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
   <script src="/js/jquery.arctext.js"></script>
-  <script src="/js/jquery.cookie.js"></script>
   <script src="/application.js"></script>
   </body>
 </html>

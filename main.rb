@@ -133,6 +133,7 @@ get '/' do
   session[:state] = 0
   response.set_cookie 'state', session[:state]
   session[:player_pot] = INITIAL_POT_AMOUNT
+  session[:bet_amount] = 0
   session[:chip_1] = CHIP_1_VAL
   session[:chip_2] = CHIP_2_VAL
   session[:chip_3] = CHIP_3_VAL
@@ -152,7 +153,7 @@ get '/bet' do
 end
 
 get '/bet_amount' do
-  halt erb(:game) if session[:state] != 1
+  halt erb(:game, layout: false) if session[:state] != 1
   session[:bet_amount] = session[:bet_amount].to_i + params[:bet_add].to_i
   erb :game, layout: false
 end
@@ -160,10 +161,11 @@ end
 post '/bet' do
   if session[:bet_amount].nil? || session[:bet_amount].to_i == 0
     @error = "Must make a bet."
-    halt erb(:game)
+    halt erb(:game, layout: false)
   elsif session[:bet_amount].to_i > session[:player_pot]
-    @error = "Bet amount cannot be greater than what you have ($#{session[:player_pot]})"
-    halt erb(:game)
+    @error = "You only have $#{session[:player_pot]} to Bet"
+    session[:bet_amount] = '0'
+    halt erb(:game, layout: false)
   else #happy path
     session[:player_bet] = session[:bet_amount]
     session[:state] = 2
@@ -183,8 +185,13 @@ post '/rebet' do
 end
 
 get '/game' do
-  if true
-    total(session[:dealer_cards]) == BLACKJACK_AMOUNT ? tie! : blackjack
+  if blackjack?
+    if total(session[:dealer_cards]) == BLACKJACK_AMOUNT
+      tie!
+      session[:state] = 4
+    else
+      blackjack
+    end
   end
   erb :game, layout: false
 end

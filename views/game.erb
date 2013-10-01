@@ -15,7 +15,7 @@
           <ul class="cards pull-left">
             <li>
           <% if session[:state] < 3 && i == 1 %>
-            <img src="/images/cards/cover.jpg" class="card">
+            <img src="/images/cards/cover1.jpg" class="card">
           <% else %>
             <img src="<%= card_image(card) %>" class="card">
           <% end %>
@@ -31,15 +31,18 @@
   <div class="row-fluid">
     <div class="span3 offset2">
       <div id="status">
-        <h3>Player <span id="pot"><%= session[:player_name]%></span></h3>
-        <h3>Balance <span id="pot">$<%= session[:player_pot]%></span></h3>
-        <h3>Current Bet <span id="bet-amount">$<%= session[:bet_amount]%></span></h3>
+        <h3>Player <span><%= session[:player_name]%></span></h3>
+        <h3>Balance <span>$<%= session[:player_pot]%></span></h3>
+        <h3>Current Bet <span>$<%= session[:bet_amount]%></span></h3>
+        <% if @error %>
+          <div class="alert alert-error"><h2><%=@error%></h2></div>
+        <% end %>
       </div>
-      <nav class="pull-left">
+      <nav>
         <% if session[:state] == 0 %>
           <form id="new_player_form" action="/new_player" method="post">
             <input type="text" name="player_name" value="Player1"/>
-            <input type="submit" value="Play" class="btn btn-large"/>
+            <input type="submit" value="Play" class="btn btn-large btn-inverse"/>
           </form>
         <% end %>
 
@@ -55,7 +58,9 @@
         <% end %>
 
         <% if session[:state] == 4 %>
-          <a href="/again" id="again" class="btn btn-large btn-inverse">Play Again</a>  
+          <% if session[:player_pot] > 0 %>
+            <a href="/again" id="again" class="btn btn-large btn-inverse">Play Again</a>  
+          <% end %>  
           <a href="/" id="reset" class="btn btn-large btn-inverse">Reset</a>  
         <% end %>
 
@@ -69,10 +74,10 @@
         <% end %>
       </nav>
       <ul id="chips" class="pull-left">
-        <li><a href="/bet_amount?bet_add=<%= session[:chip_1]%>"><%= session[:chip_1]%></a></li>
-        <li><a href="/bet_amount?bet_add=<%= session[:chip_2]%>"><%= session[:chip_2]%></a></li>
-        <li><a href="/bet_amount?bet_add=<%= session[:chip_3]%>"><%= session[:chip_3]%></a></li>
-        <li><a href="/bet_amount?bet_add=<%= session[:chip_4]%>"><%= session[:chip_4]%></a></li>
+        <li><a href="/bet_amount?bet_add=<%= session[:chip_1]%>">$<%= session[:chip_1]%></a></li>
+        <li><a href="/bet_amount?bet_add=<%= session[:chip_2]%>">$<%= session[:chip_2]%></a></li>
+        <li><a href="/bet_amount?bet_add=<%= session[:chip_3]%>">$<%= session[:chip_3]%></a></li>
+        <li><a href="/bet_amount?bet_add=<%= session[:chip_4]%>">$<%= session[:chip_4]%></a></li>
       </ul>
     </div>
     <div class="card-area span2">

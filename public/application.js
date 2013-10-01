@@ -10,10 +10,12 @@ $(document).ready(function(){
 });
 
 function new_player() {
-  $(document).on("click", "form#new_player_form input", function() {
+  $(document).on("click", '#new_player_form input[type="submit"]', function() {
+    var serializedData = $('#new_player_form').serialize();
     $.ajax({
       type: 'POST',
-      url: '/new_player'
+      url: '/new_player',
+      data: serializedData
     }).done(function(msg){
       $("div#game").replaceWith(msg);
     });
@@ -23,17 +25,15 @@ function new_player() {
 
 function bet_amount() {
   $(document).on("click", "ul#chips li a", function() {
-    var amount=$(this).text();
-    var state=$.cookie('state');
-    if (state == 1) {
-      $.ajax({
-      type: 'GET',
-      url: '/bet_amount',
-      data: { bet_add: amount }
+    var amount = $(this).text();
+    amount = amount.substring(1, amount.length);
+    $.ajax({
+    type: 'GET',
+    url: '/bet_amount',
+    data: { bet_add: amount }
     }).done(function(msg){
       $("div#game").replaceWith(msg);
     });
-    }
     return false;
   });
 }
@@ -45,6 +45,8 @@ function bet() {
       url: '/bet'
     }).done(function(msg){
       $("div#game").replaceWith(msg);
+      var $target = $(".cards");
+      $target.hide().css( "left", "600px" ).show().animate({ left: "10px" }, 300);
     });
     return false;
   });
@@ -69,6 +71,11 @@ function hit() {
       url: '/game/player/hit'
     }).done(function(msg){
       $("div#game").replaceWith(msg);
+      var $target = $(".cards").children();
+      while( $target.length ) {
+        $target = $target.children();
+      }
+      $target.end().parent().parent().hide().css( "left", "600px" ).show().animate({ left: "10px" }, 300);
     });
     return false;
   });
@@ -81,6 +88,11 @@ function stay() {
       url: '/game/player/stay'
     }).done(function(msg){
       $("div#game").replaceWith(msg);
+      var $target = $(".cards:first").children();
+      while( $target.length ) {
+        $target = $target.children();
+      }
+      $target.end().parent().parent().hide().css( "left", "600px" ).show().animate({ left: "10px" }, 300);
     });
     return false;
   });

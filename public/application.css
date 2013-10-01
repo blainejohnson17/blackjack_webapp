@@ -18,8 +18,8 @@ ol,ul { list-style: none; }
 
 .texthide { text-indent: -9999em; }
 
-.absolute {
-	position: absolute;
+body, html, #main {
+  height: 100%;
 }
 
 body {
@@ -28,11 +28,6 @@ body {
 }
 form {
 	display: inline;
-}
-
-input[type="text"] { 
-	margin-bottom: 0 !important;
-	min-height: 10px !important; height: 35px ;
 }
 
 #logo {
@@ -69,18 +64,14 @@ h1#main-title {
 }
 
 .arc-text {
-	font: normal 37px Arial, Helvetica, sans-serif;
+	font: normal 45px Arial, Helvetica, sans-serif;
 	letter-spacing: 3px;
 	color: white;
 	opacity: .8;
 }
 
 #stand {
-	top: 340px;
-}
-
-#insurance {
-	top: 400px;
+	margin-top: 50px;
 }
 
 .card-area {
@@ -111,6 +102,13 @@ ul.cards li {
 	box-shadow:         2px 2px 5px rgba(50, 50, 50, 0.75);
 }
 
+.card:hover {
+	-webkit-transform: scale(1.2) rotate(-4deg);
+	-moz-transform: scale(1.2) rotate(-4deg);
+	-o-transform: scale(1.2) rotate(-4deg);
+	transform: scale(1.2) rotate(-4deg);
+}
+
 span.score {
 	position: absolute;
 	top: 0px;
@@ -137,6 +135,9 @@ span.score {
 }
 
 #status {
+	position: relative;
+	width: 80%;
+	padding: 0 10px 0;
 	line-height: 50px;
 	font-size: 32px;
 	font-weight: bold;
@@ -153,8 +154,31 @@ span.score {
 	text-shadow: #fff 0px 0.5px 1px, #000 0 1px 1px;
 }
 
-nav input[type="text"] {
-	width: 120px;
+#status h3 {
+	background: url(/images/divider4.png) no-repeat bottom left;
+}
+
+#status span {
+	float: right;
+}
+
+nav {
+	margin-top: 10px;
+}
+
+nav input[type="text"] { 
+	margin-bottom: 0;
+	padding-left: 0;
+	padding-right: 0;
+	height: 32px ;
+}
+
+nav input[type="text"], nav input[type="submit"] {
+	width: 42.5%;
+}
+
+nav a {
+	width: 31.5%;
 }
 
 ul#chips {
@@ -168,11 +192,21 @@ ul#chips li {
 ul#chips li a {
 	width: 62px;
 	height: 62px;
-	margin: 3px 4px 0;
+	margin: 8px 8px 0;
 	display: block;
 	text-align: center;
 	text-decoration: none;
 	line-height: 62px;
+	font-size: 16px;
+	font-weight: bold;
+	color: black;
+}
+
+ul#chips li a:hover {
+	-webkit-transform: rotate(-5deg);
+	-moz-transform: rotate(-5deg);
+	-o-transform: rotate(-5deg);
+	transform: rotate(-5deg);
 }
 
 ul#chips li:nth-child(1) a {
