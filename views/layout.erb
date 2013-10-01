@@ -10,41 +10,34 @@
       <!--[if lt IE 9]>
         <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
       <![endif]-->
-      <!--[if !IE 7]>
-        <style type="text/css">
-          #wrap {display:table;height:100%}
-        </style>
-      <![endif]-->
   </head>
   <body>
-  <div id="wrap">
-    <div id="main" class="container-fluid">
+    <div class="container-fluid">
       <header class="row-fluid">
         <div class="span9 offset3">
           <a href="/" id="logo" class="pull-left texthide">Ace</a>
           <h1 id="main-title" class="pull-left">Blackjack</h1>
         </div>
       </header>
-      <div id="blackjack" class="absolute row-fluid">
-        <div class="span12">
-          <h2 id="table-text" class="text-center">Pays 3-2</h2>
+      <div id="table-text" class="container-fluid">
+        <div id="blackjack" class="row-fluid">
+          <div class="span12">
+            <h2 class="text-center">Pays 3-2</h2>
+          </div>
         </div>
-      </div>
-      <div id="stand" class="absolute row-fluid">
-        <div class="span12">
-          <h2 class="arc-text text-center">Dealer must stand on 17</h2>
+        <div id="stand" class="row-fluid">
+          <div class="span12">
+            <h2 class="arc-text text-center">Dealer must stand on 17</h2>
+          </div>
         </div>
-      </div>
-      <div id="insurance" class="absolute row-fluid">
-        <div class="span12">
-          <h2 class="arc-text text-center">Pays 2-1  Insurance Pays  2-1</h2>
+        <div id="insurance" class="row-fluid">
+          <div class="span12">
+            <h2 class="arc-text text-center">Pays 2-1  Insurance Pays  2-1</h2>
+          </div>
         </div>
       </div>
       <%= yield %>
     </div>
-  </div>
-  <footer id="footer" class="row-fluid">
-  </footer>
   <script src="http://code.jquery.com/jquery-latest.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.min.js"></script>

@@ -29,9 +29,12 @@
     </div>
   </div>
   <div class="row-fluid">
-    <div id="status" class="span3 offset2">
-      <h3>Balance<span id="pot">$<%= session[:player_pot]%></span></h3>
-      <h3>Current Bet<span id="bet-amount">$<%= session[:bet_amount]%></span></h3>
+    <div class="span3 offset2">
+      <div id="status">
+        <h3>Player <span id="pot"><%= session[:player_name]%></span></h3>
+        <h3>Balance <span id="pot">$<%= session[:player_pot]%></span></h3>
+        <h3>Current Bet <span id="bet-amount">$<%= session[:bet_amount]%></span></h3>
+      </div>
       <nav class="pull-left">
         <% if session[:state] == 0 %>
           <form id="new_player_form" action="/new_player" method="post">
@@ -79,10 +82,11 @@
           <div class="alert alert-success"><h2><%=@winner%></h2></div>
         <% elsif @loser %>
           <div class="alert alert-error"><h2><%=@loser%></h2></div>
-        <% elsif @blackjack %>
-          <div class="alert alert-success"><h2><%=@blackjack%></h2></div>
         <% elsif @tie %>
           <div class="alert alert-success"><h2><%=@tie%></h2></div>
+        <% end %>
+        <% if @blackjack %>
+          <div class="alert alert-success"><h2><%=@blackjack%></h2></div>
         <% end %>
         <% count = 1 %>
         <% session[:player_cards].each do |card| %>

@@ -54,8 +54,8 @@ helpers do
     "/images/cards/#{suit}_#{value}.jpg"
   end
 
-  def winner!(msg)
-    session[:player_pot] = session[:player_pot] + session[:player_bet]
+  def winner!(msg, blackjack=false)
+    session[:player_pot] = session[:player_pot] + (session[:player_bet] * (blackjack ? 1.5 : 1)).to_i
     @winner = "<strong>Win</strong>"
     @dealer = "<strong>#{msg}</strong>"
   end
@@ -92,7 +92,7 @@ helpers do
   end
 
   def blackjack
-    winner!("Lose")
+    winner!("Lose", true)
     @blackjack = "<strong>BLACKJACK</strong>"
     session[:state] = 4
   end
@@ -183,7 +183,7 @@ post '/rebet' do
 end
 
 get '/game' do
-  if blackjack?
+  if true
     total(session[:dealer_cards]) == BLACKJACK_AMOUNT ? tie! : blackjack
   end
   erb :game, layout: false

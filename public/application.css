@@ -35,12 +35,6 @@ input[type="text"] {
 	min-height: 10px !important; height: 35px ;
 }
 
-#main {
-	position: relative;
-	margin: 0;
-	padding: 0;
-}
-
 #logo {
 	width: 150px;
 	height: 150px;
@@ -64,6 +58,11 @@ h1#main-title {
 }
 
 #table-text {
+	position: absolute;
+	width: 96%;
+}
+
+#blackjack h2 {
 	font: normal 80px "Times New Roman", Times, serif;
 	color: white;
 	opacity: .8;
@@ -129,8 +128,25 @@ span.score {
     -webkit-box-shadow: inset 0 0 7px #000000;
     box-shadow:         inset 0 0 7px #000000;
 	height: 50px;
-	min-width: 50px;
+	width: 50px;
 	margin: 10px;
+	background: #000;
+	background: rgba(0, 0, 0, .5);
+	color: rgba(250, 250, 250, .7);
+	text-shadow: #fff 0px 0.5px 1px, #000 0 1px 1px;
+}
+
+#status {
+	line-height: 50px;
+	font-size: 32px;
+	font-weight: bold;
+	border: 1px solid black;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+    -moz-box-shadow:    inset 0 0 7px #000000;
+    -webkit-box-shadow: inset 0 0 7px #000000;
+    box-shadow:         inset 0 0 7px #000000;
 	background: #000;
 	background: rgba(0, 0, 0, .5);
 	color: rgba(250, 250, 250, .7);
@@ -178,33 +194,6 @@ ul#chips li:nth-child(4) a {
 #bet {
 	position: relative;
 	left: -20px;
-}
-
-html, body {height: 100%;}
-
-#wrap {min-height: 100%;}
-
-#main {overflow:auto;
-	padding-bottom: 80px;}  /* must be same height as the footer */
-
-#footer {
-	position: relative;
-	margin-top: -80px; /* negative value of footer height */
-	height: 80px;
-	clear:both;
-}
-
-#footer div {
-	position: relative;
-}
-
-/*Opera Fix*/
-body:before {
-	content:"";
-	height:100%;
-	float:left;
-	width:0;
-	margin-top:-32767px;/
 }
 
 .alert {
