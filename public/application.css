@@ -26,6 +26,11 @@ body {
 	background: url(/images/pool_table2.png) repeat;
 	color: #000;
 }
+
+.row-fluid {
+	clear: both;
+}
+
 form {
 	display: inline;
 }
@@ -48,7 +53,6 @@ form {
 
 h1#main-title {
 	font: normal 130px "Blackjack", Tahoma, Arial, sans-serif;
-	margin-left: 40px;
 	margin-top: 15px;
 }
 
@@ -76,7 +80,7 @@ h1#main-title {
 
 .card-area {
 	position: relative;
-	left: 20px;
+	left: 50px;
 	top: -10px;
 	height: 220px;
 	margin-bottom: 20px;
@@ -134,6 +138,10 @@ span.score {
 	text-shadow: #fff 0px 0.5px 1px, #000 0 1px 1px;
 }
 
+#control {
+	min-width: 270px;
+}
+
 #status {
 	position: relative;
 	width: 80%;
@@ -164,6 +172,7 @@ span.score {
 
 nav {
 	margin-top: 10px;
+	position: relative;
 }
 
 nav input[type="text"] { 
@@ -192,7 +201,6 @@ ul#chips li {
 ul#chips li a {
 	width: 62px;
 	height: 62px;
-	margin: 8px 8px 0;
 	display: block;
 	text-align: center;
 	text-decoration: none;
