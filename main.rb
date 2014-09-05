@@ -2,6 +2,7 @@ require 'rubygems'
 require 'sinatra'
 
 set :sessions, true
+set :protection, :except => [:session_hijacking]
 
 BLACKJACK_AMOUNT = 21
 DEALER_MIN_STAY = 17
